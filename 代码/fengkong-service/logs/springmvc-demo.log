@@ -1,0 +1,56 @@
+2017-09-20 12:39:12 [INFO]-[org.springframework.context.support.ClassPathXmlApplicationContext] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@42ca7192: startup date [Wed Sep 20 12:39:12 CST 2017]; root of context hierarchy
+  2017-09-20 12:39:12 [INFO]-[org.springframework.beans.factory.xml.XmlBeanDefinitionReader] Loading XML bean definitions from class path resource [spring/applicationContext-redis.xml]
+  2017-09-20 12:39:13 [INFO]-[org.springframework.context.support.PropertySourcesPlaceholderConfigurer] Loading properties file from file [G:\MyGit\Redis\代码\fengkong-service\fengkong-service\target\classes\properties\db.properties]
+  2017-09-20 12:39:13 [INFO]-[org.springframework.context.support.PropertySourcesPlaceholderConfigurer] Loading properties file from file [G:\MyGit\Redis\代码\fengkong-service\fengkong-service\target\classes\properties\mq.properties]
+  2017-09-20 12:39:13 [INFO]-[org.springframework.context.support.PropertySourcesPlaceholderConfigurer] Loading properties file from file [G:\MyGit\Redis\代码\fengkong-service\fengkong-service\target\classes\properties\path.properties]
+  2017-09-20 12:39:13 [INFO]-[org.springframework.context.support.PropertySourcesPlaceholderConfigurer] Loading properties file from file [G:\MyGit\Redis\代码\fengkong-service\fengkong-service\target\classes\properties\redis.properties]
+  2017-09-20 12:39:14 [WARN]-[org.springframework.context.support.ClassPathXmlApplicationContext] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'topicMessageListener' defined in class path resource [spring/applicationContext-redis.xml]: Cannot resolve reference to bean 'jedisTemplate' while setting bean property 'redisTemplate'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'jedisTemplate' is defined
+  2017-09-20 12:39:56 [INFO]-[org.springframework.context.support.ClassPathXmlApplicationContext] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4a8487ba: startup date [Wed Sep 20 12:39:56 CST 2017]; root of context hierarchy
+  2017-09-20 12:39:56 [INFO]-[org.springframework.beans.factory.xml.XmlBeanDefinitionReader] Loading XML bean definitions from class path resource [spring/applicationContext-redis.xml]
+  2017-09-20 12:39:57 [INFO]-[org.springframework.context.support.PropertySourcesPlaceholderConfigurer] Loading properties file from file [G:\MyGit\Redis\代码\fengkong-service\fengkong-service\target\classes\properties\db.properties]
+  2017-09-20 12:39:57 [INFO]-[org.springframework.context.support.PropertySourcesPlaceholderConfigurer] Loading properties file from file [G:\MyGit\Redis\代码\fengkong-service\fengkong-service\target\classes\properties\mq.properties]
+  2017-09-20 12:39:57 [INFO]-[org.springframework.context.support.PropertySourcesPlaceholderConfigurer] Loading properties file from file [G:\MyGit\Redis\代码\fengkong-service\fengkong-service\target\classes\properties\path.properties]
+  2017-09-20 12:39:57 [INFO]-[org.springframework.context.support.PropertySourcesPlaceholderConfigurer] Loading properties file from file [G:\MyGit\Redis\代码\fengkong-service\fengkong-service\target\classes\properties\redis.properties]
+  2017-09-20 12:39:57 [INFO]-[org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler] Initializing ExecutorService  'org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler#5aa1b7a1'
+  2017-09-20 12:39:57 [INFO]-[org.springframework.context.support.DefaultLifecycleProcessor] Starting beans in phase 2147483647
+  2017-09-20 13:01:54 [WARN]-[org.springframework.data.redis.listener.RedisMessageListenerContainer] Execution of message listener failed, and no ErrorHandler has been set.
+  org.springframework.data.redis.serializer.SerializationException: Could not read JSON: Unrecognized token 'hello': was expecting ('true', 'false' or 'null')
+ at [Source: [B@5e36aab5; line: 1, column: 11]; nested exception is com.fasterxml.jackson.core.JsonParseException: Unrecognized token 'hello': was expecting ('true', 'false' or 'null')
+ at [Source: [B@5e36aab5; line: 1, column: 11]
+	at org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer.deserialize(GenericJackson2JsonRedisSerializer.java:119)
+	at org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer.deserialize(GenericJackson2JsonRedisSerializer.java:98)
+	at com.ryx.TopicMessageListener.onMessage(TopicMessageListener.java:24)
+	at org.springframework.data.redis.listener.RedisMessageListenerContainer.executeListener(RedisMessageListenerContainer.java:249)
+	at org.springframework.data.redis.listener.RedisMessageListenerContainer.processMessage(RedisMessageListenerContainer.java:239)
+	at org.springframework.data.redis.listener.RedisMessageListenerContainer$1.run(RedisMessageListenerContainer.java:967)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:166)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:178)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:292)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:722)
+Caused by: com.fasterxml.jackson.core.JsonParseException: Unrecognized token 'hello': was expecting ('true', 'false' or 'null')
+ at [Source: [B@5e36aab5; line: 1, column: 11]
+	at com.fasterxml.jackson.core.JsonParser._constructError(JsonParser.java:1702)
+	at com.fasterxml.jackson.core.base.ParserMinimalBase._reportError(ParserMinimalBase.java:558)
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._reportInvalidToken(UTF8StreamJsonParser.java:3528)
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._handleUnexpectedValue(UTF8StreamJsonParser.java:2686)
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._nextTokenNotInObject(UTF8StreamJsonParser.java:878)
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser.nextToken(UTF8StreamJsonParser.java:772)
+	at com.fasterxml.jackson.databind.ObjectMapper._initForReading(ObjectMapper.java:3834)
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:3783)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:2929)
+	at org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer.deserialize(GenericJackson2JsonRedisSerializer.java:117)
+	... 14 more
+2017-09-20 13:09:49 [INFO]-[org.springframework.context.support.ClassPathXmlApplicationContext] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@43be098f: startup date [Wed Sep 20 13:09:49 CST 2017]; root of context hierarchy
+  2017-09-20 13:09:49 [INFO]-[org.springframework.beans.factory.xml.XmlBeanDefinitionReader] Loading XML bean definitions from class path resource [spring/applicationContext-redis.xml]
+  2017-09-20 13:09:50 [INFO]-[org.springframework.context.support.PropertySourcesPlaceholderConfigurer] Loading properties file from file [G:\MyGit\Redis\代码\fengkong-service\fengkong-service\target\classes\properties\db.properties]
+  2017-09-20 13:09:50 [INFO]-[org.springframework.context.support.PropertySourcesPlaceholderConfigurer] Loading properties file from file [G:\MyGit\Redis\代码\fengkong-service\fengkong-service\target\classes\properties\mq.properties]
+  2017-09-20 13:09:50 [INFO]-[org.springframework.context.support.PropertySourcesPlaceholderConfigurer] Loading properties file from file [G:\MyGit\Redis\代码\fengkong-service\fengkong-service\target\classes\properties\path.properties]
+  2017-09-20 13:09:50 [INFO]-[org.springframework.context.support.PropertySourcesPlaceholderConfigurer] Loading properties file from file [G:\MyGit\Redis\代码\fengkong-service\fengkong-service\target\classes\properties\redis.properties]
+  2017-09-20 13:09:50 [INFO]-[org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler] Initializing ExecutorService  'org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler#196e71cc'
+  2017-09-20 13:09:50 [INFO]-[org.springframework.context.support.DefaultLifecycleProcessor] Starting beans in phase 2147483647
+  

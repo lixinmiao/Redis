@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryx.verify.mapper.VerifyUserRiskMapper">
+	
+	<!-- <resultMap id= "StudentMap" type= "com.ryx.verify.mapper.pojo.Student" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="age" property="age" jdbcType="INTEGER" />
+		<result column="sex" property="sex" jdbcType="VARCHAR" />
+		<result column="createtime" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap> -->
+	
+	<!-- 基础字段 -->
+	<sql id="base_column">
+		id,`name`,age,sex
+	</sql>
+	
+	<!-- 分页条件 
+	<sql id="page_where">
+		<where>
+		<if test="name !=null and name !=''">
+			and `name`  like "%"#{name}"%"
+		</if>
+		 <if test="null!=startTime">
+	      		  <![CDATA[   and a.createtime>=#{startTime}]]>
+         </if>
+         <if test="null!=endTime">
+     	 		 <![CDATA[   and a.createtime<=#{endTime}]]>
+         </if>
+         <if test="status !=null and status!='' ">
+				and `status`=#{status}
+		 </if>
+		</where>
+	</sql>-->
+	
+	<!-- 获取总记录数 
+	<select id="queryByPageCount" resultType="java.lang.Integer" parameterType="domain">
+		SELECT COUNT(distinct(a.id)) FROM  domain a left join dictionariesvalue b on a.logoCode = b.id  <include refid="page_where"/>
+	</select>-->
+	
+	<!-- 分页获取信息 
+	<select id="queryByPage" resultMap="DomainMap" parameterType="domain">
+		SELECT <include refid="page_column"></include>
+		FROM domain a left join dictionariesvalue b on a.logoCode = b.id
+		  <include refid="page_where"/>
+		order by a.id DESC  limit  #{startCount},#{pageSize}
+	</select>-->
+	
+	<!--插入  
+	<insert id="insertEntity" parameterType="domain" >
+	<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+   		SELECT LAST_INSERT_ID()   
+	</selectKey>   
+		insert into  domain(id,
+		domainurl,domainmsg,modelindex,modelcount,name,createUserId,createUserName,createTime,remark,status,logoCode,logoCodeCount,trueorfalse)
+		values( null,
+		 #{domainurl}, #{domainmsg}, #{modelindex}, #{modelcount}, #{name}, #{createUserId}, #{createUserName}, #{createTime}, #{remark}, #{status},#{logoCode},#{logoCodeCount},#{trueorfalse} )
+	</insert >-->
+	
+	<!-- 修改 
+	<update id="updateEntity" parameterType="domain" >
+	update domain
+	<set >
+		<if test="domainurl !=null " >
+			domainurl = #{domainurl} ,
+		</if>
+	</set >
+		where id = #{id}  
+	</update>-->
+	
+	<!-- <select id="insertIntoTb_user_risk" resultType="com.ryx.verify.mapper.pojo.Student">
+		select * from student
+	</select> -->
+	
+	<!--插入用户风险分数  -->
+	<insert id="insertIntoTb_user_risk" parameterType="com.ryx.verify.mapper.pojo.User_Risk">
+		<selectKey resultType="long" keyProperty="id" order="AFTER"> 
+		SELECT 
+		LAST_INSERT_ID() 
+		</selectKey>
+		insert into tb_user_risk
+			(
+			userID,
+			score,
+			labelcode,
+			updateTime
+			)
+		values
+			(
+			#{userID},
+			#{score},
+			#{labelcode},
+			#{updateTime}
+			)
+	</insert>
+	
+	<!--批量插入风险详情  -->
+	<insert id="insertIntoTb_user_risk_detail" parameterType="java.util.List">
+		insert into tb_user_risk_detail
+			(
+			userID,
+			riskFactorCode,
+			riskFactor,
+			riskDescription,
+			updateTime
+			)
+		values
+		<foreach collection ="list" item="item" index= "index" separator =",">
+			(
+			#{item.userID},
+			#{item.riskFactorCode},
+			#{item.riskFactor},
+			#{item.riskDescription},
+			#{item.updateTime}
+			)
+        </foreach >
+	</insert>
+	
+	<!--查询用户风险信息是否存在  -->
+	<select id="selectTb_user_riskIsExist" resultType="java.lang.Integer">
+		select count(1) from tb_user_risk where userID=#{userID}
+	</select>
+	
+	<!--修改用户风险信息  -->
+	<update id="updateIntoTb_user_risk" parameterType="com.ryx.verify.mapper.pojo.User_Risk">
+		update tb_user_risk
+		<set >
+			<if test="score !=null and score !=''">
+				score = #{score} ,
+			</if>
+			<if test="labelcode !=null and labelcode !=''">
+				labelcode = #{labelcode} ,
+			</if>
+			<if test="updateTime !=null">
+				updateTime = #{updateTime} ,
+			</if>
+			<if test="note !=null and note !=''">
+				note = #{note} ,
+			</if>
+		</set >
+		where userID=#{userID}
+	</update>
+	
+	<!--删除用户风险评分详情  -->
+	<delete id="deleteTb_user_risk_detail">
+		delete from tb_user_risk_detail where userID=#{userID}
+	</delete>
+	
+	
+	
+</mapper> 

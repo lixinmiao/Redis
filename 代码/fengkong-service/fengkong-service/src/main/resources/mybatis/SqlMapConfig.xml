@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 设置 -->
+	<settings>
+		<!-- 配置该属性值为 false, 才会保证懒加载好用. -->
+		<setting name="aggressiveLazyLoading" value="false"/>
+		<!-- 可以把标准的列名和标准的属性名之间进行转换 -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		
+		<!-- log4j日志信息配置 -->
+        <setting name="logImpl" value="LOG4J"/>  
+	</settings>
+</configuration>
